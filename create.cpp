@@ -36,7 +36,7 @@ void create(char filename[],int size,int u_id,int mode,int limit)
             i_node[i].i_size = size;
             i_node[i].i_Uid = u_id;
             i_node[i].i_limit = limit;
-            // TODO 申请length个空闲块
+            allot(size);// 申请size个空闲块
             break;
          }
     }

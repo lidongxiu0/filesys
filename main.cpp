@@ -7,7 +7,7 @@ struct inode i_node[1024];
 struct Username uname[8];
 struct block memory[memorysize];
 struct Super_Block super_block;
-
+int physic[100];    //文件地址缓冲区
 
 
 int main() {

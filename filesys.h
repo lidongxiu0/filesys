@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-
+#include <memory.h>
 using namespace std;
 
 #define blocksize 1024  //盘块大小
@@ -16,13 +16,11 @@ using namespace std;
 #define FOLDER 0  //文件夹
 #define DOCUMENT 1  //文件
 
-/*
-string UserName[8] = { "root","user1","user2","user3","user4","user5","user6","user7" };
-string PassWord[8] = { "0","1","2","3","4","5","6","7" };
-*/
-
-using namespace std;
-
+extern int physic[100];    //文件地址缓冲区
+// string UserName[8] = { "root","user1","user2","user3","user4","user5","user6","user7" };
+// string PassWord[8] = { "0","1","2","3","4","5","6","7" };
+extern char filename[100];  //暂存文件名
+//盘块
 //盘块
 struct block
 {
@@ -50,6 +48,12 @@ struct inode
     int i_Uid;  //所属用户
     int i_count;  //文件计数
     time_t i_time;  //文件修改时间
+
+    bool operator==(const inode& rhs)
+    {
+        return(i_mode == rhs.i_mode) && (i_size == rhs.i_size) && (i_address == rhs.i_address)
+              && (i_limit == rhs.i_limit) && (i_Uid == rhs.i_Uid) && (i_count == rhs.i_count) && (i_time == rhs.i_time);
+    }
 };
 
 //目录项
@@ -79,14 +83,14 @@ struct Password
 //文件打开表
 struct file
 {
-    char f_flag;  //文件操作标志
     int f_count;  //引用计数
-    struct inode *f_inode;  //指向内存索引节点
-    long f_off;  //读写指针
+    struct inode f_inode;  //指向内存索引节点
+    long f_off;  //读写指针文件当前读写到的文件位置
 };
+
+// extern string UserName[8];
+// extern string PassWord[8];
 extern char cur_dir[20];
-extern string UserName[8];
-extern string PassWord[8];
 extern struct block memory[memorysize];
 extern struct Super_Block super_block;
 extern struct inode i_node[1024];
@@ -96,11 +100,14 @@ extern struct Password pwd[8];
 extern struct file sys_openfile[OSopenfile];
 
 
-
+//系统初始化
 extern void initialize();
+extern void allot(int length);
+extern void recycle(int length);
+extern void display_memory();
 extern void create(char filename[],int size,int u_id,int mode,int limit);
+extern void display(char filename[]);
 extern int openfile(char filename[]);
 extern void showfolder(char foldername[]/*临时当前目录名*/);
 extern void openfolder(char foldername[]);
-
 #endif //FILESYS_FILESYS_H

@@ -5,7 +5,10 @@ int openfile(char filename[])
     int i, i_node_num, j;
     for (i = 0; i < 1024; i++)
     {
-        if (strcmp(filename, dirn[i].f_name) == 0 && i_node[dirn[i].i_num].i_mode == DOCUMENT && i_node[dirn[i].i_num].i_Uid == uname[login].u_id && dirn[i].f_dname == cur_dir)
+        if (strcmp(filename, dirn[i].f_name) == 0 &&
+            i_node[dirn[i].i_num].i_mode == DOCUMENT &&
+            i_node[dirn[i].i_num].i_Uid == uname[login].u_id &&
+            strcmp(dirn[i].f_dname,cur_dir) == 0)
         {
             if (uname[login].u_open < OFile)
             {
