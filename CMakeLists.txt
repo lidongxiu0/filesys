@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+project(filesys)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(filesys main.cpp initialize.cpp filesys.h create.cpp open.cpp)
