@@ -1,5 +1,5 @@
 #include "filesys.h"
-int login = 1;
+
 int openfile(char filename[])
 {
     int i, i_node_num, j;

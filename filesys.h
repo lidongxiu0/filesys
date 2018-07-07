@@ -20,6 +20,7 @@ extern int physic[100];    //文件地址缓冲区
 // string UserName[8] = { "root","user1","user2","user3","user4","user5","user6","user7" };
 // string PassWord[8] = { "0","1","2","3","4","5","6","7" };
 extern char filename[100];  //暂存文件名
+extern int login;  //登录用户号
 //盘块
 //盘块
 struct block
@@ -100,8 +101,9 @@ extern struct Password pwd[8];
 extern struct file sys_openfile[OSopenfile];
 
 
-//系统初始化
-extern void initialize();
+
+
+extern void initialize();  //系统初始化
 extern void allot(int length);
 extern void recycle(int length);
 extern void display_memory();
@@ -110,4 +112,6 @@ extern void display(char filename[]);
 extern int openfile(char filename[]);
 extern void showfolder(char foldername[]/*临时当前目录名*/);
 extern void openfolder(char foldername[]);
+extern int read(char filename[]);
+extern int write(char filename[], char writein[]);
 #endif //FILESYS_FILESYS_H

@@ -7,6 +7,7 @@ void initialize()
 {
     int i = 0,j,k=0;
     super_block.sbfree = 50;
+    login = login_default;
     for (i = 0;i < 50;i++)
     {
         super_block.free_block[i] = i; //初始化进入栈的空闲块
