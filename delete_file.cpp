@@ -18,7 +18,8 @@
             && i_node[dirn[i].i_num].i_mode == mode
             //&& strcmp(dirn[i].f_dname,cur_dir) == 0
                 )
-            //如果有文件名相同，模式相同，且上级目录名相同
+            //如果有文件名相同，模式相同
+            //TODO 上级目录判定
         {
             if(i_node[dirn[i].i_num].i_limit == 0 ||
                     i_node[dirn[i].i_num].i_limit == 2) //具有修改权限

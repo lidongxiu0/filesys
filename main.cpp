@@ -1,7 +1,9 @@
 #include <iostream>
 #include "filesys.h"
 using namespace std;
+
 char cur_dir[20]= ROOTNAME;
+struct command cmd[cmdnum];
 struct dir dirn[1024];
 struct inode i_node[1024];
 struct Username uname[8];
@@ -10,39 +12,51 @@ struct Super_Block super_block;
 struct file sys_openfile[OSopenfile];
 int physic[100];    //文件地址缓冲区
 int login;
+stack<string> path;
 
-
-int main() {
-    char test[20] = "test";
-    char test2[20] = "test2";
-    char test3[20] = "test3";
-    cout << "Hello, World!" << endl;
-    initialize();
-    uname[1] = {1,"user",0,10};
-    //showfolder(cur_dir/*临时当前目录名*/)
-    login = 1;
-    cout << 1 << endl;
-    create(test, 4, 1, FOLDER, 0);
-    cout << 2 << endl;
-    showfolder(cur_dir/*临时当前目录名*/);
-    cout << 3 << endl;
-    openfolder(test);
-    cout << 4 << endl;
-    create(test2, 4, 1, FOLDER, 0);
-    //showfolder(cur_dir);
-    cout << 5 << endl;
-    openfolder(test2);
-    cout << 6 << endl;
-    create(test3, 2, 1, DOCUMENT, 0);
-    showfolder(cur_dir);
-    cout<<"?"<<endl;
-    display(test3);
-    cout<<"！"<<endl;
-    delete_file(test2,0,1);
-    cout << 7 << endl;
-    display(test);
-    re_r_dir();
-    showfolder(test);
-    //format();
+int main()
+{
+    cout << "欢迎使用本模拟文件系统" << endl;
+    int over = 1, i = 0;
+    char putin[30] = "help";
+    string cur;
+    strcpy(cmd[0].com, "format");    //将各个命令存进命令表
+    strcpy(cmd[1].com, "reg");
+    strcpy(cmd[2].com, "help");
+    strcpy(cmd[3].com, "du");
+    strcpy(cmd[4].com, "ls");
+    strcpy(cmd[5].com, "cd");
+    strcpy(cmd[6].com, "touch");
+    strcpy(cmd[7].com, "read");
+    strcpy(cmd[8].com, "write");
+    strcpy(cmd[9].com, "open");
+    strcpy(cmd[10].com, "close");
+    strcpy(cmd[11].com, "mkdir");
+    strcpy(cmd[12].com, "rmdir");
+    strcpy(cmd[13].com, "exit");
+    strcpy(cmd[14].com, "quit");
+    strcpy(cmd[15].com, "delete");
+    help();
+    while (over)
+    {
+        cur = cur_dir;
+        path.push(cur);
+        for (i = 0; i < 2; i++)
+        {
+            if (strcmp(cur_dir, dirn[i].f_name) == 0)
+            {
+                cur = dirn[i].f_dname;
+                path.push(cur);
+            }
+        }
+        for (i = 0; i < path.size(); i++)
+        {
+            cout << path.top() << "\\";
+            path.pop();
+        }
+        cout << ">";
+        cin >> putin;
+        over = input_process(putin);////TODO 修改该函数内的字符识别方法
+    }
     return 0;
 }

@@ -5,8 +5,10 @@
 #include <cstdlib>
 #include <string>
 #include <memory.h>
+#include <stack>
 using namespace std;
 
+#define cmdnum 18
 #define blocksize 1024  //盘块大小
 #define memorysize 1024  //内存中块个数
 #define NDDR 10  //每个i节点最多
@@ -23,6 +25,12 @@ extern int physic[100];    //文件地址缓冲区
 extern char filename[100];  //暂存文件名
 extern char cur_dir[20];
 extern int login;  //登录用户号
+extern stack<string> path;  //当前文件路径
+
+struct command
+{
+    char com[10];
+};
 
 //盘块
 struct block
@@ -94,6 +102,7 @@ struct file
 // extern string UserName[8];
 // extern string PassWord[8];
 
+extern struct command cmd[cmdnum];
 extern struct block memory[memorysize];
 extern struct Super_Block super_block;
 extern struct inode i_node[1024];
@@ -121,4 +130,6 @@ extern void closefile(char filename[]);
 extern void re_p_dir();
 extern void re_r_dir();
 extern void delete_file(char filename[],int mode,int u_id);
+extern int input_process(char str[]);
+extern void help();
 #endif //FILESYS_FILESYS_H
