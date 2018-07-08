@@ -41,10 +41,10 @@ int input_process(char str[])
         }
         for(i = 0;i < path.size();i++)
         {
-            cout << path.top() << "\\";
+            //cout << path.top() << "\\";
             path.pop();
         }
-        cout << ">";
+        //cout << ">";
 
         strcpy(com,str);   //输入命令并且查找命令的相关操作
         for (i = 0; i < cmdnum; i++)
@@ -55,12 +55,10 @@ int input_process(char str[])
                 break;
             }
         }
-        /*
-        if (i == 17)         //如果没有这个语句以后输入的命令都和第一次输入的效果一样
+        if (i == 18)
         {
             p = -1; //随便的一个值
         }
-         */
         switch (p)
         {
             case 0:

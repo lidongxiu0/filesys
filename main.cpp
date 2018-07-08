@@ -16,6 +16,8 @@ stack<string> path;
 
 int main()
 {
+    uname[1] = {1,"user",0,10};
+
     cout << "欢迎使用本模拟文件系统" << endl;
     int over = 1, i = 0;
     char putin[30] = "help";
