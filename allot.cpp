@@ -38,5 +38,4 @@ void allot(int length)
         super_block.sbfree--;
         cout << "磁盘分配完毕"<< k << endl;
     }
-
 }

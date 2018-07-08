@@ -13,7 +13,7 @@
  * */
 void create(char filename[],int size,int u_id,int mode,int limit)
 {
-    int i;
+    int i,j;
     // 当前目录下是否有重名文件
     // TODO 当前目录下查找重复的文件名
     for(i = 0;i < 1024;i++)
@@ -37,6 +37,11 @@ void create(char filename[],int size,int u_id,int mode,int limit)
             i_node[i].i_Uid = u_id;
             i_node[i].i_limit = limit;
             allot(size);// 申请size个空闲块
+            for(j = 0;j < size;j++)
+            {
+                i_node[i].i_address[j] = physic[j]; //分配空间
+                physic[j] = -1; //分配后立即清空缓冲区
+            }
             break;
          }
     }

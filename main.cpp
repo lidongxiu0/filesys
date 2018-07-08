@@ -29,12 +29,15 @@ int main() {
     openfolder(test);
     cout << 4 << endl;
     create(test2, 4, 1, FOLDER, 0);
-    showfolder(cur_dir);
+    //showfolder(cur_dir);
     cout << 5 << endl;
     openfolder(test2);
     cout << 6 << endl;
     create(test3, 2, 1, DOCUMENT, 0);
     showfolder(cur_dir);
+    cout<<"?"<<endl;
+    display(test3);
+    cout<<"！"<<endl;
     cout << 7 << endl;
     re_r_dir();
     showfolder(cur_dir);
