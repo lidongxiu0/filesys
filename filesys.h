@@ -15,11 +15,13 @@ using namespace std;
 #define login_default 0  //默认登录用户号
 #define FOLDER 0  //文件夹
 #define DOCUMENT 1  //文件
+#define ROOTNAME "file system"
 
 extern int physic[100];    //文件地址缓冲区
 // string UserName[8] = { "root","user1","user2","user3","user4","user5","user6","user7" };
 // string PassWord[8] = { "0","1","2","3","4","5","6","7" };
 extern char filename[100];  //暂存文件名
+extern char cur_dir[20];
 extern int login;  //登录用户号
 //盘块
 //盘块
@@ -91,7 +93,7 @@ struct file
 
 // extern string UserName[8];
 // extern string PassWord[8];
-extern char cur_dir[20];
+
 extern struct block memory[memorysize];
 extern struct Super_Block super_block;
 extern struct inode i_node[1024];
@@ -110,8 +112,12 @@ extern void display_memory();
 extern void create(char filename[],int size,int u_id,int mode,int limit);
 extern void display(char filename[]);
 extern int openfile(char filename[]);
+extern void showfile(char filename[], int i_node_num);
 extern void showfolder(char foldername[]/*临时当前目录名*/);
 extern void openfolder(char foldername[]);
 extern int read(char filename[]);
 extern int write(char filename[], char writein[]);
+extern void closefile(char filename[]);
+extern void re_p_dir();
+extern void re_r_dir();
 #endif //FILESYS_FILESYS_H
