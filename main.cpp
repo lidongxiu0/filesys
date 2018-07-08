@@ -38,11 +38,11 @@ int main() {
     cout<<"?"<<endl;
     display(test3);
     cout<<"！"<<endl;
-    delete_file(test3,1,1);
+    delete_file(test2,0,1);
     cout << 7 << endl;
-    display(test3);
+    display(test);
     re_r_dir();
-    showfolder(cur_dir);
+    showfolder(test);
     //format();
     return 0;
 }

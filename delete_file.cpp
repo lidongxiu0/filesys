@@ -14,14 +14,16 @@
     int i = 0,j,k;
     for (i = 0; i < 1024; i++)
     {
-        if (strcmp(filename, dirn[i].f_name) == 0 &&
-                i_node[dirn[i].i_num].i_mode == mode &&
-                strcmp(dirn[i].f_dname,cur_dir) == 0)
+        if (strcmp(filename, dirn[i].f_name) == 0
+            && i_node[dirn[i].i_num].i_mode == mode
+            //&& strcmp(dirn[i].f_dname,cur_dir) == 0
+                )
             //如果有文件名相同，模式相同，且上级目录名相同
         {
             if(i_node[dirn[i].i_num].i_limit == 0 ||
                     i_node[dirn[i].i_num].i_limit == 2) //具有修改权限
             {
+                // 删除文件
                 if(mode == DOCUMENT)    //如果是文件
                 {
                     for(j = 0;j < i_node[dirn[i].i_num].i_size;j++)
@@ -56,10 +58,28 @@
                 else if(mode == FOLDER)
                 {
                     //TODO 删除文件夹
+                    for(j = 0;j < 1024;j++) //遍历目录项
+                    {
+                        if(strcmp(dirn[j].f_dname,filename)==0) //从目录项找上级目录名是该文件夹的
+                        {
+                            if(i_node[dirn[j].i_num].i_mode == FOLDER)    //如果是该目录下的文件夹就递归调用删除
+                            {
+                                delete_file(dirn[j].f_name,FOLDER,u_id);
+                            }
+                            else if(i_node[dirn[j].i_num].i_mode == DOCUMENT)   //如果是该目录下的文件就递归调用删除
+                            {
+                                delete_file(dirn[j].f_name,DOCUMENT,u_id);
+                            }
+                        }
+                    }
+                    //将该文件夹属性变为文件属性再删除
+                    i_node[dirn[i].i_num].i_mode =  DOCUMENT;
+                    //删除本文件夹
+                    delete_file(filename,DOCUMENT,u_id);
                 }
             }
             else
-                cout<<"无权删除"<<endl;
+                cout<<"用户"<<u_id<<"无权删除"<<filename<<endl;
             break;
         }
     }
