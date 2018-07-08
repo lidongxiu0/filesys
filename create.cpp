@@ -39,7 +39,7 @@ void create(char filename[],int size,int u_id,int mode,int limit)
             allot(size);// 申请size个空闲块
             for(j = 0;j < size;j++)
             {
-                i_node[i].i_address[j] = physic[j]; //分配空间
+                i_node[i].i_address[j] = physic[j]; //分配物理块空间
                 physic[j] = -1; //分配后立即清空缓冲区
             }
             break;

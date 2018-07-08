@@ -23,7 +23,7 @@ extern int physic[100];    //文件地址缓冲区
 extern char filename[100];  //暂存文件名
 extern char cur_dir[20];
 extern int login;  //登录用户号
-//盘块
+
 //盘块
 struct block
 {
@@ -64,7 +64,7 @@ struct dir
 {
     char f_name[20];  //文件名
     int i_num;  //文件的i节点号
-    char f_dname[20];   //文件上级目录
+    char f_dname[20];   //文件上级目录名
 };
 
 //用户名
@@ -120,4 +120,5 @@ extern int write(char filename[], char writein[]);
 extern void closefile(char filename[]);
 extern void re_p_dir();
 extern void re_r_dir();
+extern void delete_file(char filename[],int mode,int u_id);
 #endif //FILESYS_FILESYS_H
