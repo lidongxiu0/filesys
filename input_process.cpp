@@ -127,6 +127,8 @@ int input_process(char str[])
                 delete_file(temp, FOLDER, uname[login].u_id);
                 return 1;
             case 13:
+                load_disk();
+                save_disk();
                 return 0;  //退出
             case 14:
                 //登出

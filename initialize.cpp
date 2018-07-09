@@ -16,8 +16,9 @@ void initialize()
 
     for (i = 0;i < 1024 ;i++) //目录项初始化
     {
-        strcpy(dirn[i].f_name,"");
+        strcpy(dirn[i].f_name, "null");
         dirn[i].i_num = -1;
+        strcpy(dirn[i].f_dname, "null");
     }
 
     for (i = 0;i < 1024 ;i++)          //文件结点初始化
@@ -31,7 +32,7 @@ void initialize()
         {
             i_node[i].i_address[j] = -1;       //文件地址初始化
         }
-
+        //TODO 找内存地址，将写入磁盘
     }
 
     for (i = 0; i < 1024; ++i)   //存储空间初始化
@@ -42,7 +43,7 @@ void initialize()
         memset(memory[i].content,'\0', sizeof(memory[i].content));
     }
 
-    for(i = 0;i < OSopenfile;i++)
+    for(i = 0;i < OSopenfile;i++)   //文件打开表
     {
         sys_openfile[i].f_count = 0;
         sys_openfile[i].f_inode = -1;
@@ -71,7 +72,7 @@ void initialize()
         for (j = 0; j < 50; j++) {
             memory[i].bfree_address[j] = -1;
         }
-        memory[i].flag = 0;
+        memory[i].bfree = 0;
     }
     for(int i = 0; i < 100; i++) {
         physic[i] = -1;

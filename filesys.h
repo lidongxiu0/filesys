@@ -138,5 +138,7 @@ extern int input_process(char str[]);
 extern void help();
 extern void enroll();
 extern void sign_in();
+extern void save_disk();
+extern void load_disk();
 
 #endif //FILESYS_FILESYS_H
