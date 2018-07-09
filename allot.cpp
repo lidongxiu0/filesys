@@ -10,7 +10,7 @@ void allot(int length)
     int m = -1;
     for(i=0;i<length;i++)
     {
-        k = 50-super_block.sbfree;    //超级块中表示空闲块的指针
+        k = 50-super_block.sbfree;    //超级块中表示空闲块的位置
         m = super_block.free_block[k];   //栈中的相应盘块的地址
         p = super_block.free_block[49];   //栈中的最后一个盘块指向的地址
         if(p == -1)  //没有剩余盘块
@@ -21,7 +21,7 @@ void allot(int length)
         }
         if(super_block.sbfree == 1)
         {
-            memory[m].bfree = 1;    //将最后一个盘块分配掉
+            memory[m].flag = 1;    //将最后一个盘块分配掉
             physic[i] = m;
             super_block.free_block[49] = -1;
             super_block.sbfree = 0;
@@ -34,7 +34,8 @@ void allot(int length)
         }
         physic[i] = m;     //如果栈中超过一个盘，栈中的相应盘块的地址写进 文件地址缓冲区
         memory[m].flag = 1;
-        i_node[i].i_address[m] +=1;
+        // i_node[i].i_address[m] +=1;
+        m = -1;
         super_block.sbfree--;
         cout << "磁盘分配完毕"<< k << endl;
     }

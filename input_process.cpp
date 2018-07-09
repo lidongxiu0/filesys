@@ -15,7 +15,7 @@ int input_process(char str[])
     {
         j = 0;         //必须重新给恢复0否则出错
         strcpy(temp, cur_dir);
-        while (strcmp(temp, "file system") != 0)
+        while (strcmp(temp, "filesystem") != 0)
         {
             for (i = 0; i<640; i++)
             {

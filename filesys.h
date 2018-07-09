@@ -18,7 +18,7 @@ using namespace std;
 #define login_default 0  //默认登录用户号
 #define FOLDER 0  //文件夹
 #define DOCUMENT 1  //文件
-#define ROOTNAME "file system"
+#define ROOTNAME "filesystem"
 
 extern int physic[100];    //文件地址缓冲区
 extern string username[8];
