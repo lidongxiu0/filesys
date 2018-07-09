@@ -13,14 +13,14 @@ int read(char filename[])
         {
             for (j = 0; j < OSopenfile; j++)
             {
-                if (sys_openfile[j].f_inode == i_node[dirn[i].i_num] && i_node[dirn[i].i_num].i_Uid == uname[login].u_id)
+                if (dirn[i].i_num == sys_openfile[j].f_inode)
                 {
                     if (i_node[dirn[i].i_num].i_limit == 0 || i_node[dirn[i].i_num].i_limit == 1)
                     {
                         int c, ch = 0;
                         for (c = 0; c < NDDR; c++)
                         {
-                            for ( ; ch < i_node[dirn[i].i_num].i_size; ch++)
+                            for ( ; ch < i_node[dirn[i].i_num].i_lenth; ch++)
                             {
                                 sys_openfile[j].f_off = ch;
                                 cout << memory[i_node[dirn[i].i_num].i_address[c]].content[ch];
@@ -56,24 +56,31 @@ int write(char filename[],char writein[])
         {
             for (j = 0; j < OSopenfile; j++)
             {
-                if (sys_openfile[j].f_inode == i_node[dirn[i].i_num] && i_node[dirn[i].i_num].i_Uid == uname[login].u_id)
+                //if (sys_openfile[j].f_inode == i_node[dirn[i].i_num] && i_node[dirn[i].i_num].i_Uid == uname[login]
+                 //                                                                                               .u_id)
+                if(dirn[i].i_num == sys_openfile[j].f_inode)
                 {
                     if (i_node[dirn[i].i_num].i_limit == 0 || i_node[dirn[i].i_num].i_limit == 2)
                     {
                         int c, ch, in = 0;
                         ch = sys_openfile[j].f_off;
-                        for (c = 0; c < NDDR; c++)
+                        for (c = 0; c <= NDDR; c++)
                         {
-                            ch = sys_openfile[j].f_off % c;
-                            for (; ch < blocksize, in<sizeof(writein); ch++, in++, sys_openfile[j].f_off++)
+                            ch = sys_openfile[j].f_off % blocksize;
+                            int a = strlen(writein);
+                            for (; ch < blocksize, in<a; ch++, in++, sys_openfile[j].f_off++)
                             {
                                 memory[i_node[dirn[i].i_num].i_address[c]].content[ch] = writein[in];
                             }
                         }
+                        /*
                         if (c <= NDDR)
                         {
                             cout << "文件空间已满，不能写入" << endl;
                         }
+                        return 0;
+                         */
+                        i_node[dirn[i].i_num].i_lenth = ch;
                         return 0;
                     }
                     else

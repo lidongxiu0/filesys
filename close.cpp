@@ -12,7 +12,7 @@ void closefile(char filename[])
         {
             for (j = 0; j < OSopenfile; j++)
             {
-                if (sys_openfile[j].f_inode == i_node[dirn[i].i_num]) //找到匹配的打开文件
+                if (sys_openfile[j].f_inode == dirn[i].i_num) //找到匹配的打开文件
                 {
                     for (m = 0; m < uname[login].u_open; m++)
                     {

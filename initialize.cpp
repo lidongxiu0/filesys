@@ -7,7 +7,7 @@ void initialize()
 {
     int i = 0,j,k=0;
     super_block.sbfree = 50;
-    login = login_default;
+    // login = login_default;
     for (i = 0;i < 50;i++)
     {
         super_block.free_block[i] = i; //初始化进入栈的空闲块
@@ -25,6 +25,7 @@ void initialize()
         i_node[i].i_limit = -1;
         i_node[i].i_count = 0;
         i_node[i].i_Uid = -1;
+        i_node[i].i_lenth = -1;
         i_node[i].i_size = -1;
         for(j = 0;j<50;j++)
         {
@@ -39,6 +40,13 @@ void initialize()
         memory[i].flag = 0;
         memset(memory[i].bfree_address,-1, sizeof(memory[i].bfree_address));
         memset(memory[i].content,'\0', sizeof(memory[i].content));
+    }
+
+    for(i = 0;i < OSopenfile;i++)
+    {
+        sys_openfile[i].f_count = 0;
+        sys_openfile[i].f_inode = -1;
+        sys_openfile[i].f_off = 0;
     }
 
     for(i = 0;i < 1024; i++)    //将空闲块的信息用成组链接的方法写进每组的最后一个块中

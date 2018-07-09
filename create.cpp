@@ -34,6 +34,7 @@ void create(char filename[],int size,int u_id,int mode,int limit)
             strcpy(dirn[i].f_dname,cur_dir);
             i_node[i].i_mode = mode;
             i_node[i].i_size = size;
+            i_node[i].i_lenth = 0;
             i_node[i].i_Uid = u_id;
             i_node[i].i_limit = limit;
             allot(size);// 申请size个空闲块

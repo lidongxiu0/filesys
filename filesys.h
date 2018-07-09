@@ -6,6 +6,7 @@
 #include <string>
 #include <memory.h>
 #include <stack>
+#include <fstream>
 using namespace std;
 
 #define cmdnum 18
@@ -20,12 +21,14 @@ using namespace std;
 #define ROOTNAME "file system"
 
 extern int physic[100];    //文件地址缓冲区
-// string UserName[8] = { "root","user1","user2","user3","user4","user5","user6","user7" };
-// string PassWord[8] = { "0","1","2","3","4","5","6","7" };
+extern string username[8];
+extern string password[8];
 extern char filename[100];  //暂存文件名
 extern char cur_dir[20];
 extern int login;  //登录用户号
 extern stack<string> path;  //当前文件路径
+extern string username[8];
+extern string userpassword[8];
 
 struct command
 {
@@ -57,6 +60,7 @@ struct inode
     int i_address[NDDR];  //物理块号
     int i_limit;  //读写权限，0：可读可写；1：可读不可写；2：可写不可读
     int i_Uid;  //所属用户
+    int i_lenth; //文件长度
     int i_count;  //文件计数
     time_t i_time;  //文件修改时间
 
@@ -88,14 +92,14 @@ struct Username
 struct Password
 {
     int p_id;  //用户ID
-    char p_password[12];//密码
+    string p_password;//密码
 };
 
 //文件打开表
 struct file
 {
     int f_count;  //引用计数
-    struct inode f_inode;  //指向内存索引节点
+    int f_inode;  //指向内存索引节点
     long f_off;  //读写指针文件当前读写到的文件位置
 };
 
@@ -132,4 +136,7 @@ extern void re_r_dir();
 extern void delete_file(char filename[],int mode,int u_id);
 extern int input_process(char str[]);
 extern void help();
+extern void enroll();
+extern void sign_in();
+
 #endif //FILESYS_FILESYS_H

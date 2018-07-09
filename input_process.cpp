@@ -30,6 +30,7 @@ int input_process(char str[])
         }
 
         cur = cur_dir;
+        /*
         path.push(cur);
         for(i = 0;i < 3;i++)
         {
@@ -44,6 +45,7 @@ int input_process(char str[])
             //cout << path.top() << "\\";
             path.pop();
         }
+         */
         //cout << ">";
 
         strcpy(com,str);   //输入命令并且查找命令的相关操作
@@ -63,6 +65,7 @@ int input_process(char str[])
         {
             case 0:
                 initialize();       //初始化
+                uname[0] = {0,"user",0,10};
                 return 1;
             case 1:
                 //注册用户

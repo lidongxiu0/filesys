@@ -10,14 +10,17 @@ struct Username uname[8];
 struct block memory[memorysize];
 struct Super_Block super_block;
 struct file sys_openfile[OSopenfile];
+struct Password pwd[8];
 int physic[100];    //文件地址缓冲区
-int login;
+int login = 0;
 stack<string> path;
+
+string username[8]={"w","w","w","w","w","w","w","w"};
+string userpassword[8];
+
 
 int main()
 {
-    uname[1] = {1,"user",0,10};
-
     cout << "欢迎使用本模拟文件系统" << endl;
     int over = 1, i = 0;
     char putin[30] = "help";
@@ -43,7 +46,7 @@ int main()
     {
         cur = cur_dir;
         path.push(cur);
-        for (i = 0; i < 2; i++)
+        for (i = 0; i < 1024; i++)
         {
             if (strcmp(cur_dir, dirn[i].f_name) == 0)
             {

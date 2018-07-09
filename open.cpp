@@ -27,11 +27,12 @@ int openfile(char filename[])
             }
             if (uname[login].u_open < OFile)
             {
-                uname[login].u_open++;
+
                 uname[login].u_ofile[uname[login].u_open] = dirn[i].i_num;
+                uname[login].u_open++;
                 i_node_num = dirn[i].i_num;
                 sys_openfile[cur_open].f_count = 1;
-                sys_openfile[cur_open].f_inode = i_node[i_node_num];
+                sys_openfile[cur_open].f_inode = i_node_num;
                 sys_openfile[cur_open].f_off = 0;
             }
             else
@@ -99,6 +100,7 @@ void showfile(char filename[], int i_node_num)
 void showfolder(char foldername[])
 {
     int i;
+    cout << login << endl;
     cout << "用户：" << uname[login].u_name << endl;  //当前用户
     cout << "\t包含文件\t文件类型\t文件大小\t修改时间\t上级目录" << endl;
     for (i = 0; i < 1024; i++)
