@@ -4,31 +4,31 @@
 
 #include "filesys.h"
 
-
+//注册
 void enroll()
 {
     int i = 0;
     string registername;
     string registerpassword;
     string registerpassword2;
-    cout<<"请输入要注册的用户名："<<endl;
+    cout << "请输入要注册的用户名：" << endl;
     cin >> registername;
-    for(i = 0; i < 8;i++)
+    for (i = 0; i < 8; i++)
     {
         if (registername == username[i]) {
             cout << "已存在此用户，注册失败" << endl;
             enroll();
-            return ;
+            return;
         }
     }
 
-    if(username[7] != "w")
+    if (username[7] != "w")
     {
         cout << "注册用户已达上限，请滚去登陆" << endl;
         sign_in();
     }
 
-    for (i=0;i<8;i++) {
+    for (i = 0; i < 8; i++) {
         if (username[i] == "w") {
             cout << "请输入密码：" << endl;
             cin >> registerpassword;
@@ -37,10 +37,14 @@ void enroll()
             if (registerpassword == registerpassword2) {
                 username[i] = registername;
                 userpassword[i] = registerpassword;
+                uname[i].u_id = i;
+                strcpy(uname[i].u_name, username[i].c_str());
+                pwd[i].p_password = userpassword[i];
+                pwd[i].p_id = uname[i].u_id ;
                 cout << "注册成功" << endl;
                 break;
             }
-            else if(registerpassword != registerpassword2)
+            else if (registerpassword != registerpassword2)
             {
                 cout << "两次输入密码不一致" << endl;
                 enroll();

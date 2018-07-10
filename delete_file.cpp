@@ -19,7 +19,7 @@
             //&& strcmp(dirn[i].f_dname,cur_dir) == 0
                 )
             //如果有文件名相同，模式相同
-            //TODO 上级目录判定
+            // 上级目录判定
         {
             if(i_node[dirn[i].i_num].i_limit == 0 ||
                     i_node[dirn[i].i_num].i_limit == 2) //具有修改权限
@@ -58,7 +58,7 @@
                 }
                 else if(mode == FOLDER)
                 {
-                    //TODO 删除文件夹
+                    // 删除文件夹
                     for(j = 0;j < 1024;j++) //遍历目录项
                     {
                         if(strcmp(dirn[j].f_dname,filename)==0) //从目录项找上级目录名是该文件夹的

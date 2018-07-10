@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 #include "filesys.h"
 using namespace std;
 
@@ -22,8 +23,17 @@ string userpassword[8];
 int main()
 {
     load_disk();
+    //save_user();
+    load_user();
+    /*
+    int shit;
+    for(shit = 0;shit < 8;shit++)
+    {
+        cout<<uname[shit].u_id<<"#"<<uname[shit].u_name<<"#"<<pwd[uname[shit].u_id].p_password<<endl;
+    }
+     */
     cout << "欢迎使用本模拟文件系统" << endl;
-    int over = 1, i = 0;
+    int over = 1, i = 0,j = 0;
     char putin[30] = "help";
     string cur;
     strcpy(cmd[0].com, "format");    //将各个命令存进命令表
@@ -42,27 +52,27 @@ int main()
     strcpy(cmd[13].com, "exit");
     strcpy(cmd[14].com, "quit");
     strcpy(cmd[15].com, "delete");
+
+    cout << "是否需要注册用户（是Y）" << endl;
+    char choose;
+    cin >> choose;
+    if((choose == 'y')||(choose == 'Y'))
+    {
+        enroll();
+        save_user();
+    }
+    //cout << "请登录"<< endl;
+    sign_in();
+    cout<<endl;
+    //system("cls");
     help();
     while (over)
     {
-        cur = cur_dir;
-        path.push(cur);
-        for (i = 0; i < 1024; i++)
-        {
-            if (strcmp(cur_dir, dirn[i].f_name) == 0)
-            {
-                cur = dirn[i].f_dname;
-                path.push(cur);
-            }
-        }
-        for (i = 0; i < path.size(); i++)
-        {
-            cout << path.top() << "\\";
-            path.pop();
-        }
+        cout << uname[login].u_name << ":";
+        cout << cur_dir;
         cout << ">";
         cin >> putin;
-        over = input_process(putin);////TODO 修改该函数内的字符识别方法
+        over = input_process(putin);//修改该函数内的字符识别方法
     }
     return 0;
 }

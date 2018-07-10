@@ -4,14 +4,14 @@
 
 //存文件   超级块*50+i节点*1024+目录项*1024+磁盘块*1024
 //读文件   超级块*50+i节点*1024+目录项*1024+磁盘块*1024
-
+#include <string>
 #include "filesys.h"
 
 void load_disk()
 {
     int i = 0, j = 0;
     ifstream infile("//Users/wujiayi/Desktop/filesys.txt", ios::in);
-    cout<<"infile:"<<infile.is_open()<<endl;
+    //cout<<"infile:"<<infile.is_open()<<endl;
     if(!infile.is_open()) //测试文件是否打开
     {
         cerr << "open error" << endl;
@@ -23,10 +23,10 @@ void load_disk()
         infile >> super_block.sbfree;
         for(i = 0;i < 50;i++)
             infile >> super_block.free_block[i];
-        cout<<"fuck infile:";
-        for(i = 0;i < 50;i++)
-            cout<<super_block.free_block[i]<<" ";
-        cout<<endl;
+        //cout<<"fuck infile:";
+        //for(i = 0;i < 50;i++)
+        //   cout<<super_block.free_block[i]<<" ";
+        //cout<<endl;
 
         //i节点
         for(i = 0;i<1024;i++)
@@ -92,7 +92,7 @@ void save_disk()
     int i = 0,j = 0;
     ofstream outfile("/Users/wujiayi/Desktop/filesys.txt",ios::out);
     cout << "save_disk" <<endl;
-    cout << outfile.is_open() <<"@ "<<super_block.sbfree<< endl;
+    //cout << outfile.is_open() <<"@ "<<super_block.sbfree<< endl;
     if(outfile.is_open())
     {
         //超级块
@@ -144,4 +144,43 @@ void save_disk()
         outfile.close();
     }
     return;
+}
+
+void load_user()
+{
+    int i = 0, j = 0;
+    ifstream inuserfile("//Users/wujiayi/Desktop/user.txt", ios::in);
+    //cout<<"infile:"<<inuserfile.is_open()<<endl;
+    if(!inuserfile.is_open()) //测试文件是否打开
+    {
+        cerr << "open user file error" << endl;
+        return;
+    }
+    else
+    {
+        for(i = 0;i < 8;i++)
+        {
+            inuserfile >> uname[i].u_id >> uname[i].u_name >>pwd[uname[i].u_id].p_password;
+        }
+    }
+}
+
+void save_user()
+{
+    int i = 0,j = 0;
+    ofstream outuserfile("/Users/wujiayi/Desktop/user.txt",ios::out);
+    for(i = 0;i < 8;i++)
+    {
+        outuserfile<<uname[i].u_id <<" ";
+        if(strcmp(uname[i].u_name," ")==0)
+        {
+            outuserfile<<"@";
+        }
+        outuserfile<<uname[i].u_name<<" ";
+        if(pwd[uname[i].u_id].p_password == "\0")
+        {
+            outuserfile<<"@";
+        }
+            outuserfile<<pwd[uname[i].u_id].p_password<<endl;
+    }
 }

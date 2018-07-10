@@ -140,5 +140,8 @@ extern void enroll();
 extern void sign_in();
 extern void save_disk();
 extern void load_disk();
+extern void load_user();
+extern void save_user();
+extern int cmp(char str1[], string str2);
 
 #endif //FILESYS_FILESYS_H

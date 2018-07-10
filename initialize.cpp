@@ -77,4 +77,10 @@ void initialize()
     for(int i = 0; i < 100; i++) {
         physic[i] = -1;
     }
+    for(i = 0;i < 8;i++)
+    {
+        uname[i].u_id=-1;
+        strcpy(uname[i].u_name," ");
+        pwd[i].p_id=-1;
+    }
 }

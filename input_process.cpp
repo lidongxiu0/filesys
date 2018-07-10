@@ -30,25 +30,8 @@ int input_process(char str[])
         }
 
         cur = cur_dir;
-        /*
-        path.push(cur);
-        for(i = 0;i < 3;i++)
-        {
-            if(strcmp(cur_dir,dirn[i].f_name) == 0)
-            {
-                cur = dirn[i].f_dname;
-                path.push(cur);
-            }
-        }
-        for(i = 0;i < path.size();i++)
-        {
-            //cout << path.top() << "\\";
-            path.pop();
-        }
-         */
-        //cout << ">";
 
-        strcpy(com,str);   //输入命令并且查找命令的相关操作
+        strcpy(com, str);   //输入命令并且查找命令的相关操作
         for (i = 0; i < cmdnum; i++)
         {
             if (strcmp(com, cmd[i].com) == 0)
@@ -59,17 +42,17 @@ int input_process(char str[])
         }
         if (i == 18)
         {
-            p = -1; //随便的一个值
+            p = -1;
         }
         switch (p)
         {
             case 0:
                 initialize();       //初始化
-                uname[0] = {0,"user",0,10};
                 save_disk();
                 return 1;
             case 1:
-                //注册用户
+                enroll(); //注册
+                save_user(); //用户信息磁盘更新
                 return 1;
             case 2:
                 help();     //查看帮助
@@ -128,11 +111,13 @@ int input_process(char str[])
                 delete_file(temp, FOLDER, uname[login].u_id);
                 return 1;
             case 13:
+                save_user();
                 save_disk();
                 return 0;  //退出
             case 14:
-                //登出
-                return 0;
+                //login = login_default;//登出
+                sign_in();
+                return 1;
             case 15:
                 cin >> temp;  //删除文件
                 delete_file(temp, DOCUMENT, uname[login].u_id);
