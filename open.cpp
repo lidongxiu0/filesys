@@ -11,6 +11,7 @@ int openfile(char filename[])
             i_node[dirn[i].i_num].i_mode == DOCUMENT &&
             (i_node[dirn[i].i_num].i_Uid == uname[login].u_id || uname[login].u_id == 0)&&
             strcmp(dirn[i].f_dname, cur_dir) == 0)
+
         {
             for (k = 0; k < OSopenfile; k++)
             {
@@ -43,11 +44,12 @@ int openfile(char filename[])
             break;
         }
 
-        if (i >= 1024)
-        {
-            cout << "该文件不存在，请重新选择。" << endl;
-            return 0;
-        }
+
+    }
+    if (i >= 1024)
+    {
+        cout << "该文件不存在，请重新选择。" << endl;
+        return 0;
     }
     showfile(filename, i_node_num);
     return i_node_num;
@@ -58,14 +60,14 @@ void showfile(char filename[], int i_node_num)
 {
     int j;
     char c[20];
-    cout << "文件名\t文件类型\t文件大小\t读取权限\t修改时间\t上级目录\t用户" << endl;
+    cout << "文件名\t文件类型\t文件大小\t读取权限\t上级目录" << endl;
     for (j = 0; j < 1024; j++)
     {
         if (strcmp(filename, dirn[j].f_name) == 0 && (i_node[i_node_num].i_mode == DOCUMENT))
         {
             cout << dirn[j].f_name;  //文件名
             cout << "\t文件";  //文件类型
-            cout << "\t" << i_node[i_node_num].i_size;  //文件大小
+            cout << "\t\t" << i_node[i_node_num].i_size;  //文件大小
             switch (i_node[i_node_num].i_limit)
             {
                 case 0:cout << "\t可读可写";
@@ -75,7 +77,7 @@ void showfile(char filename[], int i_node_num)
                 case 2:cout << "\t可写不可读";
                     break;
             }
-            cout << "\t" << i_node[i_node_num].i_time;  //修改时间
+            // cout << "\t" << i_node[i_node_num].i_time;  //修改时间
             cout << "\t" << dirn[j].f_dname;  //上级目录
 
             cout << endl;
@@ -130,7 +132,7 @@ void openfolder(char foldername[])
             //设置当前目录名
             strcpy(cur_dir, dirn[i].f_name);
 
-            cout << cur_dir << endl;
+  //          cout << cur_dir << endl;
             //显示当前目录项
             showfolder(cur_dir);
             return;
