@@ -21,6 +21,7 @@ string userpassword[8];
 
 int main()
 {
+    load_disk();
     cout << "欢迎使用本模拟文件系统" << endl;
     int over = 1, i = 0;
     char putin[30] = "help";

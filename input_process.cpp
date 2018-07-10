@@ -66,7 +66,7 @@ int input_process(char str[])
             case 0:
                 initialize();       //初始化
                 uname[0] = {0,"user",0,10};
-                load_disk();
+                save_disk();
                 return 1;
             case 1:
                 //注册用户
