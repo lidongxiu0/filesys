@@ -62,13 +62,6 @@ struct inode
     int i_Uid;  //所属用户
     int i_lenth; //文件长度
     int i_count;  //文件计数
-    time_t i_time;  //文件修改时间
-
-    bool operator==(const inode& rhs)
-    {
-        return(i_mode == rhs.i_mode) && (i_size == rhs.i_size) && (i_address == rhs.i_address)
-              && (i_limit == rhs.i_limit) && (i_Uid == rhs.i_Uid) && (i_count == rhs.i_count) && (i_time == rhs.i_time);
-    }
 };
 
 //目录项

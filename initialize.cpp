@@ -54,7 +54,7 @@ void initialize()
     {         //存储空间初始化
 
         if ((i + 1) % 50 == 0) {
-            cout << "组号" << k << endl;
+//            cout << "组号" << k << endl;
             k = i + 1;
             for (j = 0; j < 50; j++) {
                 if (k < 1025) {

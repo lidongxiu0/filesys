@@ -149,7 +149,7 @@ void save_disk()
 void load_user()
 {
     int i = 0, j = 0;
-    ifstream inuserfile("//Users/wujiayi/Desktop/user.txt", ios::in);
+    ifstream inuserfile("user.txt", ios::in);
     //cout<<"infile:"<<inuserfile.is_open()<<endl;
     if(!inuserfile.is_open()) //测试文件是否打开
     {

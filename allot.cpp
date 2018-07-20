@@ -37,6 +37,6 @@ void allot(int length)
         // i_node[i].i_address[m] +=1;
         m = -1;
         super_block.sbfree--;
-        cout << "磁盘分配完毕"<< k << endl;
+//        cout << "磁盘分配完毕"<< k << endl;
     }
 }
