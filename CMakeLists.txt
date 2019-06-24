@@ -3,4 +3,4 @@ project(filesys)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(filesys main.cpp initialize.cpp filesys.h create.cpp open.cpp allot.cpp display_memory.cpp display.cpp recycle.cpp)
+add_executable(filesys main.cpp initialize.cpp filesys.h create.cpp open.cpp allot.cpp display_memory.cpp display.cpp recycle.cpp read_write.cpp close.cpp delete_file.cpp input_process.cpp diskop.cpp sign_in.cpp enroll.cpp)

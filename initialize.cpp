@@ -7,6 +7,7 @@ void initialize()
 {
     int i = 0,j,k=0;
     super_block.sbfree = 50;
+    // login = login_default;
     for (i = 0;i < 50;i++)
     {
         super_block.free_block[i] = i; //初始化进入栈的空闲块
@@ -15,8 +16,9 @@ void initialize()
 
     for (i = 0;i < 1024 ;i++) //目录项初始化
     {
-        strcpy(dirn[i].f_name,"");
+        strcpy(dirn[i].f_name, "null");
         dirn[i].i_num = -1;
+        strcpy(dirn[i].f_dname, "null");
     }
 
     for (i = 0;i < 1024 ;i++)          //文件结点初始化
@@ -24,12 +26,13 @@ void initialize()
         i_node[i].i_limit = -1;
         i_node[i].i_count = 0;
         i_node[i].i_Uid = -1;
+        i_node[i].i_lenth = -1;
         i_node[i].i_size = -1;
         for(j = 0;j<50;j++)
         {
             i_node[i].i_address[j] = -1;       //文件地址初始化
         }
-
+        //TODO 找内存地址，将写入磁盘
     }
 
     for (i = 0; i < 1024; ++i)   //存储空间初始化
@@ -40,11 +43,18 @@ void initialize()
         memset(memory[i].content,'\0', sizeof(memory[i].content));
     }
 
+    for(i = 0;i < OSopenfile;i++)   //文件打开表
+    {
+        sys_openfile[i].f_count = 0;
+        sys_openfile[i].f_inode = -1;
+        sys_openfile[i].f_off = 0;
+    }
+
     for(i = 0;i < 1024; i++)    //将空闲块的信息用成组链接的方法写进每组的最后一个块中
     {         //存储空间初始化
 
         if ((i + 1) % 50 == 0) {
-            cout << "组号" << k << endl;
+//            cout << "组号" << k << endl;
             k = i + 1;
             for (j = 0; j < 50; j++) {
                 if (k < 1025) {
@@ -62,9 +72,15 @@ void initialize()
         for (j = 0; j < 50; j++) {
             memory[i].bfree_address[j] = -1;
         }
-        memory[i].flag = 0;
+        memory[i].bfree = 0;
     }
     for(int i = 0; i < 100; i++) {
         physic[i] = -1;
+    }
+    for(i = 0;i < 8;i++)
+    {
+        uname[i].u_id=-1;
+        strcpy(uname[i].u_name," ");
+        pwd[i].p_id=-1;
     }
 }
